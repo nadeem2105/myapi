@@ -267,4 +267,8 @@ public function verifyOtp(Request $request)
     ]);
 }
 
+public function checkuser(){
+    return "User Check Succeed";
+}
+
 }
