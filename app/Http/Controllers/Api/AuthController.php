@@ -272,7 +272,21 @@ public function checkuser(){
 }
 
 public function updateProfile(Request $request){
-    return "UpdateProfile";
+     $request->validate([
+        'id' => 'required|exists:users,id',
+        'name' => 'required|string|max:255',
+    ]);
+
+    $user = User::find($request->id);
+
+    $user->name = $request->name;
+    $user->save();
+
+    return response()->json([
+        'status' => true,
+        'message' => 'User name updated successfully',
+        'data' => $user
+    ]);
 
 }
 
