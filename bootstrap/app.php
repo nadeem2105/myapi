@@ -5,6 +5,8 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Auth\AuthenticationException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -25,13 +27,22 @@ return Application::configure(basePath: dirname(__DIR__))
         return route('login');
     });
 })
-   ->withExceptions(function (Exceptions $exceptions) {
-    $exceptions->render(function (\Illuminate\Auth\AuthenticationException $e, \Illuminate\Http\Request $request) {
+->withExceptions(function (Exceptions $exceptions) {
+    $exceptions->render(function (AuthenticationException $e, Request $request) {
         if ($request->is('api/*') || $request->expectsJson()) {
             return response()->json([
                 'status' => false,
-                'message' => 'Unauthorized'
+                'message' => 'Unauthorised',
             ], 401);
+        }
+    });
+
+    $exceptions->render(function (MethodNotAllowedHttpException $e, Request $request) {
+        if ($request->is('api/*') || $request->expectsJson()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Method Not Allowed',
+            ], 405);
         }
     });
 })->create();
