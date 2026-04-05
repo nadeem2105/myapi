@@ -271,4 +271,9 @@ public function checkuser(){
     return "User Check Succeed";
 }
 
+public function updateProfile(Request $request){
+    return "UpdateProfile";
+
+}
+
 }

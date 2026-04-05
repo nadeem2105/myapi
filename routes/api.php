@@ -21,6 +21,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/sendOtp', [AuthController::class, 'sendOtp']);
 Route::post('/verifyOtp', [AuthController::class, 'verifyOtp']);
 Route::get('/checkuser', [AuthController::class, 'checkuser']);
+Route::get('/updateProfile',[AuthController::class, 'updateProfile']);
 
 Route::get('/posts', [PostController::class, 'index']);
 Route::post('/posts', [PostController::class, 'store']);
