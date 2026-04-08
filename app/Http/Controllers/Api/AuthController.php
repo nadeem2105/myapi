@@ -267,8 +267,16 @@ public function verifyOtp(Request $request)
     ]);
 }
 
-public function checkuser(){
-    return "User Check Succeed";
+public function checkuser(Request $request){
+    $user = User::find($request->id);
+
+    if($user){
+        return response()->json([
+        'status' => true,
+        'message' => 'User fetched successfully',
+        'data' => $user
+    ]);
+    }
 }
 
 public function updateProfile(Request $request){
