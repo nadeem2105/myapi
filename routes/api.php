@@ -20,7 +20,7 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/sendOtp', [AuthController::class, 'sendOtp']);
 Route::post('/verifyOtp', [AuthController::class, 'verifyOtp']);
-Route::get('/checkuser', [AuthController::class, 'checkuser']);
+Route::post('/checkuser', [AuthController::class, 'checkuser']);
 Route::post('/updateProfile',[AuthController::class, 'updateProfile']);
 
 Route::get('/posts', [PostController::class, 'index']);
