@@ -4,6 +4,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\BannerController;
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\HomeController;
+use App\Http\Controllers\Api\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +26,15 @@ Route::post('/sendOtp', [AuthController::class, 'sendOtp']);
 Route::post('/verifyOtp', [AuthController::class, 'verifyOtp']);
 Route::post('/checkuser', [AuthController::class, 'checkuser']);
 Route::post('/updateProfile',[AuthController::class, 'updateProfile']);
+Route::get('/home', [HomeController::class, 'home']);
+Route::get('/banners', [BannerController::class, 'banners']);
+
+Route::get('/categories', [CategoryController::class, 'categories']);
+
+Route::get('/category-products/{category_id}', [ProductController::class, 'categoryProducts']);
+
+Route::get('/product-details/{id}', [ProductController::class, 'productDetails']);
+
 
 Route::get('/posts', [PostController::class, 'index']);
 Route::post('/posts', [PostController::class, 'store']);
@@ -39,4 +52,6 @@ Route::get('/test', function () {
 Route::middleware('auth:api')->group(function () {
     Route::get('/profile', [AuthController::class, 'profile']);
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/home', [HomeController::class, 'home']);
+    Route::get('/product-details/{id}', [ProductController::class, 'productDetails']);
 });

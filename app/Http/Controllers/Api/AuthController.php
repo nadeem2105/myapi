@@ -276,6 +276,11 @@ public function checkuser(Request $request){
         'message' => 'User fetched successfully',
         'data' => $user
     ]);
+    }else{
+        return response()->json([
+            'status' => false,
+            'message' => 'no user found',
+        ]);
     }
 }
 
